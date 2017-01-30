@@ -13,7 +13,7 @@ public class WordCount {
 
     public static void main(String[] args) throws IOException {
         String file = args[0];
-        int countLimit = parseInt(args[2]);
+        int countLimit = parseInt(args[1]);
         if (countLimit <= 0) {
             throw new IllegalArgumentException("Please enter valid number upper than '1'.");
         }
