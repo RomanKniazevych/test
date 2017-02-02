@@ -1,12 +1,12 @@
 package com.codetask.test;
 
-import com.codetask.main.UniqueWords;
 import org.junit.Test;
 
-import java.util.stream.Stream;
-
+import static com.codetask.WordCount.convertToRawWord;
+import static com.codetask.WordCount.splitLineIntoWords;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by romankniazevych on 1/30/17.
@@ -14,12 +14,18 @@ import static org.junit.Assert.assertArrayEquals;
 public class UniqueWordsTest {
 
     @Test
-    public void testSpiltLineByPattern() throws Exception {
-        UniqueWords uniqueWords = new UniqueWords("([\\., ])");
-        Stream<String> stringStream = uniqueWords.splitLines(Stream.of("rrr,. !bb b5 bd,dd2.aa xx"));
+    public void testConvertToRawWord() throws Exception {
+          assertEquals("aaaa", convertToRawWord("aaaa"));
+          assertEquals("rrr", convertToRawWord("rrr,"));
+          assertEquals("rrr", convertToRawWord(",rrr,"));
+          assertEquals("bb", convertToRawWord("!bb,"));
+          assertEquals("b", convertToRawWord("b5,"));
+          assertEquals("ddd", convertToRawWord("ddd+!"));
+    }
 
-        assertArrayEquals(asList("rrr", "bb", "b", "bd","dd","aa","xx").toArray(),  stringStream.toArray());
-
+    @Test
+    public void testSplitLineIntoWords() throws Exception {
+       assertArrayEquals(asList("rrr", "bb", "b", "bd","dd","aa","xx").toArray(), splitLineIntoWords("rrr,. !bb b5 bd,dd2.aa xx").toArray());
     }
 
 }
